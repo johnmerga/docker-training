@@ -3,3 +3,4 @@ config
 Dockerfile
 .git
 .dockerignore
+.docker-compose*

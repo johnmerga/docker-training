@@ -2,12 +2,18 @@ version: '3'
 services:
   node-app:
     build: .
-    ports:
-      - "3000:3000"
+    depends_on:
+    # - start mongo before app
+      - mongoDB
+  mongoDB:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
     volumes:
-      - .:/app
-      - /app/node_modules
-    # environment:
-    #   - PORT=3000
-    env_file:
-      - config/dev.env
+    # - giving a name to mongo data volume
+      - mongo-db:/data/db
+
+# - declaring the mongo data volume      
+volumes:
+  mongo-db:
