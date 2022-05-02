@@ -1,13 +1,31 @@
-import Post from "../models/postModels";
+import Post from "../models/postModels.js";
 
+// get all posts
 const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
-    res.json({
+    res.status(200).json({
       status: "success",
-      results: posts.length,
       data: {
         posts,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
+
+// create post
+const createPost = async (req, res) => {
+  try {
+    const newPost = await Post.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: {
+        post: newPost,
       },
     });
   } catch (e) {
@@ -23,21 +41,6 @@ const getPostById = async (req, res) => {
       status: "success",
       data: {
         post,
-      },
-    });
-  } catch (e) {
-    res.status(500).json({ status: "failed" });
-  }
-};
-
-// create post
-const createPost = async (req, res) => {
-  try {
-    const newPost = await Post.create(req.body);
-    res.status(201).json({
-      status: "success",
-      data: {
-        post: newPost,
       },
     });
   } catch (e) {
@@ -76,10 +79,4 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = {
-  getAllPosts,
-  getPostById,
-  createPost,
-  deletePost,
-  updatePost,
-};
+export { getAllPosts, createPost, getPostById, updatePost, deletePost };

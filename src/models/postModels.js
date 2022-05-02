@@ -10,7 +10,5 @@ const postSchema = new mongoose.Schema({
     required: [true, "Please add some content"],
   },
 });
-
 const Post = mongoose.model("Post", postSchema);
-
-module.exports = Post;
+export default Post;

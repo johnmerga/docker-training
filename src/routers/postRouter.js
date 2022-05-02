@@ -6,19 +6,21 @@ import {
   getPostById,
   updatePost,
   deletePost,
-} from "../controllers/postController";
+} from "../controllers/postController.js";
 
 const router = express.Router();
 
 //endpoint: /api/v1/posts
 router
-    .route("/")
-    .get(getAllPosts)
-    .post(createPost);
-router
-    .route("/:id")
-    .get(getPostById)
-    .patch(updatePost)
-    .delete(deletePost);
+.route("/")
+.get(getAllPosts)
+.post(createPost);
 
-module.exports = router;
+// endpoint: /api/v1/posts/:id
+router
+.route('/:id')
+.get(getPostById)
+.patch(updatePost)
+.delete(deletePost);
+
+export { router };
