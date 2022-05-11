@@ -1,24 +1,59 @@
 //import libraries
 import express from "express";
 import bodyParser from "body-parser";
-
+import session from "express-session";
+import * as redis from "redis";
+import connectRedis from "connect-redis";
 
 // local imports
 import "./db/connectMongo.js";
-import {router as postRouter} from "./routers/postRouter.js";
+import { router as postRouter } from "./routes/postRouter.js";
+import { router as authRouter } from "./routes/userRoutes.js";
 
-
-
-
-
+let RedisStore = connectRedis(session);
+let redisClient = redis.createClient({
+  host: process.env.REDIS_URL,
+  port: process.env.REDIS_PORT,
+});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+/* Setting up the session middleware. */
+app.use(
+  session({
+    store: new RedisStore({
+      client: redisClient,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+      resave: false,
+      saveUninitialized: false,
+      httpOnly: true, // javascript can't access it
+      maxAge: 30000,
+    },
+  })
+);
 app.use(bodyParser.json());
 
+//routers
 app.use("/api/v1/posts", postRouter);
+app.use("/api/v1/users", authRouter);
 
 app.listen(PORT, () => {
   console.log("Server is running on port 3000");
 });
+
+// redisClient.on("error", (error) => {
+//   console.log(error);
+// });
+// const check = async () => {
+//   await redisClient.connect();
+//   await redisClient.set("age", "23");
+//   const value = await redisClient.get("age");
+//   console.log(`value: ${value}`);
+// };
+// check()
