@@ -13,7 +13,16 @@ services:
     volumes:
     # - giving a name to mongo data volume
       - mongo-db:/data/db
+  redis:
+    image: redis
+    # ports:
+    # - 6379:6379
+    # - giving a name to redis data volume
+    # volumes:
+    #   - redis-data:/data  
+
 
 # - declaring the mongo data volume      
 volumes:
   mongo-db:
+  # redis-data:
