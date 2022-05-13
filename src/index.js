@@ -2,7 +2,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import session from "express-session";
-import * as redis from "redis";
+import Redis from "ioredis";
 import connectRedis from "connect-redis";
 
 // local imports
@@ -11,9 +11,9 @@ import { router as postRouter } from "./routes/postRouter.js";
 import { router as authRouter } from "./routes/userRoutes.js";
 
 let RedisStore = connectRedis(session);
-let redisClient = redis.createClient({
-  host: process.env.REDIS_URL,
-  port: process.env.REDIS_PORT,
+let redisClient = new Redis({
+    host:process.env.REDIS_URL,
+    port:process.env.REDIS_PORT
 });
 
 const app = express();
@@ -37,6 +37,7 @@ app.use(
     },
   })
 );
+ 
 app.use(bodyParser.json());
 
 //routers
@@ -47,13 +48,3 @@ app.listen(PORT, () => {
   console.log("Server is running on port 3000");
 });
 
-// redisClient.on("error", (error) => {
-//   console.log(error);
-// });
-// const check = async () => {
-//   await redisClient.connect();
-//   await redisClient.set("age", "23");
-//   const value = await redisClient.get("age");
-//   console.log(`value: ${value}`);
-// };
-// check()
