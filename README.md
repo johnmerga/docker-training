@@ -56,6 +56,18 @@ to follow logs / to see interactive docker container logs
     docker logs <container-name> -f
 ```
 
+to add another instance of our node application for load balancing
+
+```bash
+    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --scale node-app=2
+
+```
+to check if it's load balancing 
+
+```bash
+docker logs docker-training_node-app_2 -f 
+
+```
 
 ## flags and their meaning
 

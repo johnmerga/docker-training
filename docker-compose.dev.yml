@@ -1,6 +1,9 @@
 version: '3'
 services:
-
+  nginx:
+    ports:
+      - 3000:80
+    
   node-app:
     build: 
       context: .
@@ -11,8 +14,8 @@ services:
       - .:/app
       # protects the files from being overwritten
       - /app/node_modules
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
     environment:
       - NODE_ENV=development
     env_file:
