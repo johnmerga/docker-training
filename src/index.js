@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import session from "express-session";
 import Redis from "ioredis";
 import connectRedis from "connect-redis";
+import cors from "cors"
 
 // local imports
 import "./db/connectMongo.js";
@@ -19,6 +20,9 @@ let redisClient = new Redis({
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
+// telling express to trust whatever our nginx server is adding onto those headers
+app.enable("trust proxy");
 /* Setting up the session middleware. */
 app.use(
   session({
@@ -33,7 +37,7 @@ app.use(
       resave: false,
       saveUninitialized: false,
       httpOnly: true, // javascript can't access it
-      maxAge: 30000,
+      maxAge: 300000,
     },
   })
 );
