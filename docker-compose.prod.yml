@@ -12,6 +12,14 @@ services:
     #   - "5000:5000"
     environment:
       - NODE_ENV=production
+      - MONGODB_URI=${MONGODB_URI}
+      - SESSION_SECRET=${SESSION_SECRET}
+      - REDIS_URL=${REDIS_URL}
+      - REDIS_PORT=${REDIS_PORT}
     env_file:
       - config/prod.env
     command: node src/index.js
+  mongoDB:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
