@@ -18,8 +18,8 @@ services:
     #   - "3000:3000"
     environment:
       - NODE_ENV=development
-    env_file:
-      - config/dev.env
+    # env_file:
+    #   - config/dev.env
     command: npm run dev
 
     

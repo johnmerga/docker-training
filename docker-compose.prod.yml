@@ -16,8 +16,8 @@ services:
       - SESSION_SECRET=${SESSION_SECRET}
       - REDIS_URL=${REDIS_URL}
       - REDIS_PORT=${REDIS_PORT}
-    env_file:
-      - config/prod.env
+    # env_file:
+    #   - config/prod.env
     command: node src/index.js
   mongoDB:
     environment:
