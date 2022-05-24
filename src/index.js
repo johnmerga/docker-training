@@ -46,7 +46,7 @@ app.use(bodyParser.json());
 
 //routers
 app.use("/api/v1/", (req, res, next) => {
-  res.send("Welcome to the API");
+  res.send("Welcome to the API!!");
 });
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/users", authRouter);
