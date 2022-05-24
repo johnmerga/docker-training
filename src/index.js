@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import session from "express-session";
 import Redis from "ioredis";
 import connectRedis from "connect-redis";
-import cors from "cors"
+import cors from "cors";
 console.log(process.env.MONGODB_URI);
 // local imports
 import "./db/connectMongo.js";
@@ -13,8 +13,8 @@ import { router as authRouter } from "./routes/userRoutes.js";
 
 let RedisStore = connectRedis(session);
 let redisClient = new Redis({
-    host:process.env.REDIS_URL,
-    port:process.env.REDIS_PORT
+  host: process.env.REDIS_URL,
+  port: process.env.REDIS_PORT,
 });
 
 const app = express();
@@ -41,14 +41,16 @@ app.use(
     },
   })
 );
- 
+
 app.use(bodyParser.json());
 
 //routers
+app.use("/api/v1/", (req, res, next) => {
+  res.send("Welcome to the API");
+});
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/users", authRouter);
 
 app.listen(PORT, () => {
   console.log("Server is running on port 3000");
 });
-
