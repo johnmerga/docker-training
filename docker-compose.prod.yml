@@ -4,6 +4,14 @@ services:
     ports:
       - 80:80
   node-app:
+    deploy: # configuring docker-compose to use docker swarm
+      replicas: 8 # how many instances of specific service you want to run
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 2
+        delay: 15s
+
     build: 
       context: .
       args:

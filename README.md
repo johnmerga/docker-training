@@ -69,6 +69,32 @@ docker logs docker-training_node-app_2 -f
 
 ```
 
+## docker swarm
+ Docker swarm is a container orchestration tool, meaning that it allows the user to manage multiple containers deployed across multiple host machines.  
+
+ ### to activate docker swarm
+
+```bash
+docker swarm init --advertise-addr <your ip address>
+
+```
+### to list services
+docker swarm works with service instead of container.  
+service is pretty much the same as container 
+
+```
+docker service ls
+```
+
+### edit `docker-compose.prod` file to uses  **docker swam**
+add 
+~~~
+deploy:
+    
+~~~
+
+
+  
 ## flags and their meaning
 
 
