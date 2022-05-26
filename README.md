@@ -92,8 +92,23 @@ add
 deploy:
     
 ~~~
+### deploying using swarm
 
+give a name to a stack at the end of the line like i did here `myapp`
+```
+docker stack deploy -c docker-compose.yml -c docker-compose.prod.yml myapp
+```
 
+### to list node
+```
+docker node ls
+
+```
+### to list stack
+```
+docker stack ls
+
+```
   
 ## flags and their meaning
 
