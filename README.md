@@ -14,7 +14,22 @@ first install Docker and docker-compose
     
 
 
-## CLI
+## usage for Docker 
+For building an image  
+The dot `.` after the end of commands stands for, it looks docker file at current directory
+
+```
+ docker build -t <give-a-name-for-custom-image> .
+```
+creating container from an existing image
+```
+docker run --name <give-container-name> -d -p 3000:3000 <image-name>
+```
+removing container and it's associated image
+```
+ docker rmi <image_id>
+```
+## usage for Docker-compose
 
 to run docker files in background
 
