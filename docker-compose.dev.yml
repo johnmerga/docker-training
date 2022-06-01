@@ -11,13 +11,17 @@ services:
         NODE_ENV: development
     volumes:
       # to sync the files from the host to the container
-      - .:/app
+      - ./src:/app/src:ro
       # protects the files from being overwritten
       - /app/node_modules
     # ports:
     #   - "3000:3000"
     environment:
       - NODE_ENV=development
+      - REDIS_URL=redis
+      - REDIS_PORT=6379
+      - SESSION_SECRET=shhhhDontTellNobody
+      - MONGODB_URI=mongodb://root:root@mongoDB/?authSource=admin
     # env_file:
     #   - config/dev.env
     command: npm run dev

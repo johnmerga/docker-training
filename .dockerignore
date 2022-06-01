@@ -4,3 +4,7 @@ Dockerfile
 .git
 .dockerignore
 .docker-compose*
+.gitignore
+.vscode
+docker-compose.*
+README.md
