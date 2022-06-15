@@ -161,12 +161,27 @@ docker node ls
 docker stack ls
 
 ```
+
+### to list services of stack
+```
+docker stack services <stack-name>
+
+```
+### to list instances of specific services
+```
+docker service ps <service-name>
+
+```
+
 ### Removing stack
 ```
 docker stack rm <stac-name>
 
 ```
-  
+### updating 
+```
+docker stack deploy -c docker-compose.yml -c docker-compose.prod.yml <stack-name>
+```
 ## flags and their meaning
 
 
