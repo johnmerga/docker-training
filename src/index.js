@@ -48,7 +48,7 @@ app.use(bodyParser.json());
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/users", authRouter);
 app.use("/api/v1/", (req, res, next) => {
-    res.send("Welcome to the API");
+    res.send("You are not supposed to be here");
   });
 
 app.listen(PORT, () => {
